@@ -1,3 +1,22 @@
+* {
+  overflow: auto;
+}
+
+body {
+  text-align: center;
+}
+
+.board div div {
+  height: 20px;
+  width: 20px;
+  border: 2px solid black;
+  display: inline-block;
+}
+
+.board div {
+  display: block;
+}
 h1 {
   color: rebeccapurple;
+  font-size: 63px;
 }
