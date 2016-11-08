@@ -144,7 +144,7 @@ var checkWin = function(player) {
             }
         }
         if (markCount === 3) {
-            if (counter % 2 === 1) {
+            if (counter % 2 === 0) {
                 console.log("player 1 wins");
                 window.setTimeout(reset, 3000);
                 $imgResetOne.css("position", "absolute");
