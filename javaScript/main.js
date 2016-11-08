@@ -1,119 +1,273 @@
+// select character for the first player
 var $playerOneOptions = $("#leftColumn img");
 var $playerOne = "";
-var charSelect = function () {
-  if ($playerOne === $(this).attr("src") || $playerOne === "") {
-    $playerOne = $(this).attr("src");
-    $(this).css({"background": "radial-gradient(lightblue 45%, lightslategrey 55%)"});
-  } else {
-    alert("you can't change players during the game");
-  }
+var $imgResetOne = "";
+var charSelectOne = function() {
+    if ($playerOne === $(this).attr("src") || $playerOne === "") { // makes sure the player doesnt try to change during the game
+        $playerOne = $(this).attr("src");
+        $(this).css({
+            "background": "radial-gradient(lightblue 45%, lightslategrey 55%)"
+        }); // char marker
+        $imgResetOne = $(this); //clone the selected img address for reset and victory purposes
+    } else {
+        alert("you can't change players during the game");
+    }
 };
-$playerOneOptions.on("click" , charSelect);
+$playerOneOptions.on("click", charSelectOne); // add an event listener to the player images for the blue player
 
 var $playerTwoOptions = $("#rightColumn img");
+var $imgResetTwo = "";
 var $playerTwo = "";
-var charSelect = function () {
-  if ($playerTwo === $(this).attr("src") || $playerTwo === "") {
-    $playerTwo = $(this).attr("src");
-    $(this).css({"background": "radial-gradient(lightpink 45%, lightslategrey 55%)"});
-  } else {
-    alert("you can't change players during the game");
-  }
+var charSelectTwo = function() {
+    if ($playerTwo === $(this).attr("src") || $playerTwo === "") { // makes sure the player doesnt try to change during the game
+        $playerTwo = $(this).attr("src");
+        $(this).css({
+            "background": "radial-gradient(lightpink 45%, lightslategrey 55%)"
+        }); // char marker
+        $imgResetTwo = $(this); //clone the selected img address for reset and victory purposes
+    } else {
+        alert("you can't change players during the game");
+    }
 };
-$playerTwoOptions.on("click" , charSelect);
+$playerTwoOptions.on("click", charSelectTwo); // add an event listener to the player images for the red player
+// options for AI player
+var opponent = "friend";
+var $buttons = $("button");
+var opponentSelect = function() {
+    if ($(this).html() == "The Game") {
+        opponent = "theGame";
+        charSelectJs();
+    }
+};
+var charSelectJs = function() {
+    if ($playerTwo !== "") { // stops from changing the js's char during the game
+        alert("we are in the middle of a game man...");
+        return;
+    }
+    var someNum = parseInt((Math.random()) * 6); // select a character for the JS AI
+    var selection = $playerTwoOptions[someNum];
+    $($playerTwoOptions[someNum]).css({
+        "background": "radial-gradient(lightpink 45%, lightslategrey 55%)"
+    });
+    $playerTwo = $(selection).attr("src");
+    $imgResetTwo = $(selection);
+};
+$buttons.on("click", opponentSelect);
 
 var $gameTiles = $(".board div div");
-var $mark = "";
 var counter = 0;
 var markTile = function() {
-  if (counter%2 === 0){
-    if ($(this).html() === "") {
-      var $newImg = $("<img>").attr("src", $playerOne).css({"height": "100%","margin": "0 auto"});
-      $(this).html($newImg);
-      counter++;
-      checkWin($newImg);
+    if (counter % 2 === 0) { // check who's turn it is
+        if ($(this).html() === "") { // prevent from player marking over each other
+            var $newImg = $("<img>").attr("src", $playerOne).css({
+                "height": "100%",
+                "margin": "0 auto"
+            }); // clone the selected character image into a new element
+            $(this).html($newImg); // assign element from line 35 to the selected slot
+            counter++; // counter up to mark the next players turn
+            if (counter >= 0) { //start testing for a winner only once the players have at-least 3 marks
+                checkWin($newImg);
+            }
+        } else {
+            alert("tile is already taken, please choose another tile");
+            markTile();
+        }
     } else {
-      alert("tile is already taken, please choose another tile");
-      markTile();
+        if ($(this).html() === "") { // prevent from player marking over each other
+            var $newImg = $("<img>").attr("src", $playerTwo).css({
+                "height": "100%",
+                "margin": "0 auto"
+            }); // clone the selected character image into a new element
+            $(this).html($newImg); // assign element from line 47 to the selected slot
+            counter++;
+            if (counter >= 0) { //start testing for a winner only once the players have at-least 3 marks
+                checkWin($newImg);
+            }
+        } else {
+            alert("tile is already taken, please choose another tile");
+            markTile();
+        }
     }
-  } else {
-    if ($(this).html() === "") {
-      var $newImg = $("<img>").attr("src", $playerTwo).css({"height": "100%","margin": "0 auto"});
-      $(this).html($newImg);
-      counter++;
-      checkWin($newImg);
-    } else {
-      alert("tile is already taken, please choose another tile");
-      markTile();
-    }
-  }
 };
+$gameTiles.on("click", markTile); // add event listener to the board
 
-$gameTiles.on("click", markTile);
+// an Array of Arrays representing the IDs of all the game tiles
+var cubes = [
+    [".cube1", ".cube2", ".cube3"],
+    [".cube4", ".cube5", ".cube6"],
+    [".cube7", ".cube8", ".cube9"],
+    [".cube1", ".cube5", ".cube9"],
+    [".cube1", ".cube4", ".cube7"],
+    [".cube2", ".cube5", ".cube8"],
+    [".cube3", ".cube6", ".cube9"],
+    [".cube3", ".cube5", ".cube7"]
+];
 
-var cubes = [[".cube1", ".cube2", ".cube3"], [".cube4", ".cube5", ".cube6"], [".cube7", ".cube8", ".cube9"], [".cube1", ".cube5", ".cube9"], [".cube1", ".cube4", ".cube7"], [".cube2", ".cube5", ".cube8"], [".cube3", ".cube6", ".cube9"], [".cube3", ".cube5", ".cube7"]];
-
-var reset = function () {
-  $playerTwo = "";
-  $playerOne = "";
-  for ( i = 0 ; i < cubes.length ; i += 1) {
-    for ( x = 0 ; x < cubes[i].length ; x += 1) {
-      $(cubes[i][x] + " img").remove();
+// Reset function to run once a winner as been delared
+var reset = function() {
+    console.log("reset was ran");
+    location.reload();
+    $imgResetTwo.css({
+        "background": "none",
+        "position": "static",
+        "max-width": "17vh",
+        "height": "auto"
+    });
+    $imgResetOne.css({
+        "background": "none",
+        "position": "static",
+        "max-width": "17vh",
+        "height": "auto"
+    });
+    $playerTwo = "";
+    $playerOne = "";
+    for (var i = 0; i < cubes.length; i += 1) {
+        for (var x = 0; x < cubes[i].length; x += 1) {
+            $(cubes[i][x] + " img").remove();
+        }
     }
-  }
 };
-
+// itterate through the array of arrays to check if any condition matches a win
 var checkWin = function(player) {
-  for (i = 0 ; i < cubes.length ; i+=1 ) {
-    markCount = 0;
-    for (x=0 ; x < cubes[i].length ; x+=1) {
-      var testCube = cubes[i][x];
-      if (player.attr("src") === $(testCube + " img").attr("src")) {
-        markCount+=1;
-      }
-    }
-    if (markCount === 3) {
-      if (counter%2 === 1) {
-        console.log("player 1 wins");
+    console.log(counter);
+    console.log("checkwin called for " + player);
+    if (counter === 9) { // checks for a draw
+        alert("The game is a draw!");
         reset();
-      } else {
-        console.log("player 2 wins");
-        reset();
-      }
     }
-  }
+    for (var i = 0; i < cubes.length; i += 1) {
+        var markCount = 0;
+        for (var x = 0; x < cubes[i].length; x += 1) {
+            var testCube = cubes[i][x];
+            if (player.attr("src") === $(testCube + " img").attr("src")) {
+                markCount += 1;
+            }
+        }
+        if (markCount === 3) {
+            if (counter % 2 === 1) {
+                console.log("player 1 wins");
+                window.setTimeout(reset, 3000);
+                $imgResetOne.css("position", "absolute");
+                $imgResetOne.animate({
+                    "top": "0",
+                    "left": "0",
+                    "maxWidth": "100vh",
+                    "height": "100vh",
+                    "zIndex": "1111222000"
+                }, 3000);
+                // reset();
+            } else {
+                console.log("player 2 wins");
+                window.setTimeout(reset, 5000);
+                $imgResetTwo.css("position", "absolute");
+                $imgResetTwo.animate({
+                    "top": "0",
+                    "left" : "0",
+                    "maxWidth": "100vh",
+                    "height": "100vh",
+                    "zIndex": "1111222000"
+                }, 3000);
+                // reset();
+            }
+        } else if (opponent === "theGame" && counter % 2 === 1) {
+            console.log("whatever");
+            updateOption();
+        }
+    }
+};
+var updateOption = function() {
+    cube1 = $(".cube1 img").attr("src") || "";
+    cube2 = $(".cube2 img").attr("src") || "";
+    cube3 = $(".cube3 img").attr("src") || "";
+    cube4 = $(".cube4 img").attr("src") || "";
+    cube5 = $(".cube5 img").attr("src") || "";
+    cube6 = $(".cube6 img").attr("src") || "";
+    cube7 = $(".cube7 img").attr("src") || "";
+    cube8 = $(".cube8 img").attr("src") || "";
+    cube9 = $(".cube9 img").attr("src") || "";
+    jSAI();
 };
 
-  // check the top right cube, then check all the lines coming out of it
-  // if ($(".cube1").html() !== "") {
-  //   if ($(".cube1").html() === $(".cube2").html() && $(".cube1").html() === $(".cube3").html()) {
-  //     console.log($mark + " top row");
-  //   } else if ($(".cube1").html() === $(".cube4").html() && $(".cube1").html() === $(".cube7").html()) {
-  //     console.log($mark + " left column");
-  //   } else if ($(".cube1").html() === $(".cube5").html() && $(".cube1").html() === $(".cube9").html()) {
-  //     console.log($mark + " left diagonal");
-  //   }
-  // }
-  // if ($(".cube4").html() !== "") {
-  //   if ($(".cube4").html() === $(".cube5").html() && $(".cube4").html() === $(".cube6").html()) {
-  //     console.log($mark + " mid row");
-  //   }
-  // }
-  // if ($(".cube2").html() !== "") {
-  //   if ($(".cube2").html() === $(".cube5").html() && $(".cube2").html() === $(".cube8").html()) {
-  //     console.log($mark + " mid column");
-  //   }
-  // }
-  // if ($(".cube3").html() !== "") {
-  //   if ($(".cube3").html() === $(".cube6").html() && $(".cube3").html() === $(".cube9").html()) {
-  //     console.log($mark + " right column");
-  //   }
-  // }
-  // if ($(".cube7").html() !== "") {
-  //   if ($(".cube7").html() === $(".cube8").html() && $(".cube7").html() === $(".cube9").html()) {
-  //     console.log($mark + " bottom row");
-  //   } else if ($(".cube7").html() === $(".cube5").html() && $(".cube7").html() === $(".cube3").html()) {
-  //     console.log($mark + " right diagonal");
-  //   }
-  // }
-// };
+var markAI = function(cube) {
+    console.log("MARK AI RAN");
+    var $newImg = $("<img></img>").attr("src", $playerTwo).css({
+        "height": "100%",
+        "margin": "0 auto"
+    }); // clone the selected character image into a new element
+    $(cube).html($newImg); // assign element from line 47 to the selected slot
+    counter++;
+    console.log("MarkAI is about to call checkWin");
+    checkWin($newImg);
+};
+var jSAI = function() {
+    var cube = "";
+    if (cube1 === "" && ((cube3 === $playerOne && cube2 === $playerOne) || (cube9 === $playerOne && cube5 === $playerOne) || (cube7 === $playerOne && cube4 === $playerOne))) {
+        cube = $('.cube1');
+        markAI(cube);
+    } else {
+        if (cube2 === "" && ((cube1 === $playerOne && cube3 === $playerOne) || (cube8 === $playerOne && cube5 === $playerOne))) {
+            cube = $('.cube2');
+            markAI(cube);
+        } else {
+            if (cube3 === "" && ((cube1 === $playerOne && cube2 === $playerOne) || (cube7 === $playerOne && cube5 === $playerOne) || (cube9 === $playerOne && cube6 === $playerOne))) {
+                cube = $('.cube3');
+                markAI(cube);
+            } else {
+                if (cube9 === "" && ((cube7 === $playerOne && cube8 === $playerOne) || (cube1 === $playerOne && cube5 === $playerOne) || (cube3 === $playerOne && cube6 === $playerOne))) {
+                    cube = $('.cube9');
+                    markAI(cube);
+                } else {
+                    if (cube7 === "" && ((cube9 === $playerOne && cube8 === $playerOne) || (cube3 === $playerOne && cube5 === $playerOne) || (cube1 === $playerOne && cube4 === $playerOne))) {
+                        cube = $('.cube7');
+                        markAI(cube);
+                    } else {
+                        if (cube8 === "" && ((cube9 === $playerOne && cube7 === $playerOne) || (cube2 === $playerOne && cube5 === $playerOne))) {
+                            cube = $('.cube8');
+                            markAI(cube);
+                        } else {
+                            if (cube4 === "" && ((cube6 === $playerOne && cube5 === $playerOne) || (cube1 === $playerOne && cube7 === $playerOne))) {
+                                cube = $('.cube4');
+                                markAI(cube);
+                            } else {
+                                if (cube6 === "" && ((cube3 === $playerOne && cube9 === $playerOne) || (cube5 === $playerOne && cube4 === $playerOne))) {
+                                    cube = $('.cube6');
+                                    markAI(cube);
+                                } else {
+                                    if (cube5 === "" && ((cube3 === $playerOne && cube7 === $playerOne) || (cube9 === $playerOne && cube1 === $playerOne) || (cube6 === $playerOne && cube4 === $playerOne) || (cube8 === $playerOne && cube2 === $playerOne))) {
+                                        cube = $('.cube5');
+                                        markAI(cube);
+                                    } else { // no 2 in a row
+                                        if (cube5 === "") {
+                                            cube = $('.cube5');
+                                            markAI(cube);
+                                        } else {
+                                            if (cube1 === "") {
+                                                cube = $('.cube1');
+                                                markAI(cube);
+                                            } else {
+                                                if (cube9 === "") {
+                                                    cube = $('.cube2');
+                                                    markAI(cube);
+                                                } else {
+                                                    if (cube8 === "") {
+                                                        cube = $('.cube8');
+                                                        markAI(cube);
+                                                    } else {
+                                                        if (cube4 === "") {
+                                                            cube = $('.cube4');
+                                                            markAI(cube);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
