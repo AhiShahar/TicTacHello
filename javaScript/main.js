@@ -201,7 +201,7 @@ var markAI = function(cube) {
 };
 var jSAI = function() {
         var cube = "";
-        if (counter >= 3) {
+        if (counter === 3 ) {
             if (cube1 === "" && (cube2 === $playerOne && cube4 === $playerOne)) {
                 cube = $('.cube1');
                 markAI(cube);
@@ -221,7 +221,7 @@ var jSAI = function() {
                 cube = $('.cube3');
                 markAI(cube);
             }
-    }
+        } else {
         if (cube1 === "" && ((cube3 === $playerOne && cube2 === $playerOne) || (cube9 === $playerOne && cube5 === $playerOne) || (cube7 === $playerOne && cube4 === $playerOne))) {
             cube = $('.cube1');
             markAI(cube);
@@ -313,6 +313,11 @@ var jSAI = function() {
                                                                                             if (cube4 === "") {
                                                                                                 cube = $('.cube4');
                                                                                                 markAI(cube);
+                                                                                            } else {
+                                                                                                if (cube7 === "") {
+                                                                                                    cube = $('.cube7');
+                                                                                                    markAI(cube);
+                                                                                                }
                                                                                             }
                                                                                         }
                                                                                     }
@@ -335,4 +340,5 @@ var jSAI = function() {
                 }
             }
         }
-    };
+    }
+};
