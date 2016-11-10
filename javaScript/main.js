@@ -210,11 +210,11 @@ var markAI = function(cube) {
 };
 var jSAI = function() {
         var cube = "";
-            if (cube1 === "" && ((cube3 === $playerOne && cube2 === $playerOne) || (cube9 === $playerOne && cube5 === $playerOne) || (cube7 === $playerOne && cube4 === $playerOne))) {
+            if (cube1 === "" && ((cube3 === $playerTwo && cube2 === $playerTwo) || (cube9 === $playerTwo && cube5 === $playerTwo) || (cube7 === $playerTwo && cube4 === $playerTwo))) {
                 cube = $('.cube1');
                 markAI(cube);
             } else {
-                if (cube2 === "" && ((cube1 === $playerOne && cube3 === $playerOne) || (cube8 === $playerOne && cube5 === $playerOne))) {
+                if (cube2 === "" && ((cube1 === $playerTwo && cube3 === $playerTwo) || (cube8 === $playerTwo && cube5 === $playerTwo))) {
                     cube = $('.cube2');
                     markAI(cube);
                 } else {
@@ -319,16 +319,16 @@ var jSAI = function() {
                                                                                             cube = $('.cube9');
                                                                                             markAI(cube);
                                                                                         } else {
-                                                                                            if (cube8 === "") {
-                                                                                                cube = $('.cube8');
+                                                                                            if (cube3 === "") {
+                                                                                                cube = $('.cube3');
                                                                                                 markAI(cube);
                                                                                             } else {
-                                                                                                if (cube4 === "") {
-                                                                                                    cube = $('.cube4');
+                                                                                                if (cube7 === "") {
+                                                                                                    cube = $('.cube7');
                                                                                                     markAI(cube);
                                                                                                 } else {
-                                                                                                    if (cube7 === "") {
-                                                                                                        cube = $('.cube7');
+                                                                                                    if (cube8 === "") {
+                                                                                                        cube = $('.cube8');
                                                                                                         markAI(cube);
                                                                                                     }
                                                                                                 }
