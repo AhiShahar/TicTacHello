@@ -147,7 +147,7 @@ var checkWin = function(player) {
                 }, 3000);
             } else {
                 console.log("player 2 wins");
-                window.setTimeout(reset, 5000);
+                window.setTimeout(reset, 3000);
                 $imgResetTwo.css("position", "absolute");
                 $imgResetTwo.animate({
                     "top": "0",
@@ -276,16 +276,16 @@ var jSAI = function() {
                                                                             cube = $('.cube9');
                                                                             markAI(cube);
                                                                         } else if (counter === 1 && cube3 === $playerOne) {
-                                                                            cube = $('.cube7');
+                                                                            cube = $('.cube5');
                                                                             markAI(cube);
                                                                         } else if (counter === 1 && cube7 === $playerOne) {
-                                                                            cube = $('.cube4');
+                                                                            cube = $('.cube5');
                                                                             markAI(cube);
                                                                         } else if (counter === 1 && cube1 === $playerOne) {
-                                                                            cube = $('.cube9');
+                                                                            cube = $('.cube5');
                                                                             markAI(cube);
                                                                         } else if (counter === 1 && cube9 === $playerOne) {
-                                                                            cube = $('.cube1');
+                                                                            cube = $('.cube5');
                                                                             markAI(cube);
                                                                         } else {
                                                                             if (cube5 === "") {
@@ -297,11 +297,11 @@ var jSAI = function() {
                                                                                     markAI(cube);
                                                                                 } else {
                                                                                     if (cube9 === "") {
-                                                                                        cube = $('.cube9');
+                                                                                        cube = $('.cube8');
                                                                                         markAI(cube);
                                                                                     } else {
                                                                                         if (cube3 === "") {
-                                                                                            cube = $('.cube3');
+                                                                                            cube = $('.cube2');
                                                                                             markAI(cube);
                                                                                         } else {
                                                                                             if (cube7 === "") {
