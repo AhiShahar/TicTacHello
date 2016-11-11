@@ -311,6 +311,11 @@ var jSAI = function() {
                                                                                                 if (cube8 === "") {
                                                                                                     cube = $('.cube8');
                                                                                                     markAI(cube);
+                                                                                                } else {
+                                                                                                    if (cube9 === "") {
+                                                                                                        cube = $('.cube9');
+                                                                                                        markAI(cube);
+                                                                                                    }
                                                                                                 }
                                                                                             }
                                                                                         }
