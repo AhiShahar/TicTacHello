@@ -296,7 +296,7 @@ var jSAI = function() {
                                                                                     cube = $('.cube1');
                                                                                     markAI(cube);
                                                                                 } else {
-                                                                                    if (cube9 === "") {
+                                                                                    if (cube8 === "") {
                                                                                         cube = $('.cube8');
                                                                                         markAI(cube);
                                                                                     } else {
