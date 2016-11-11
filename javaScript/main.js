@@ -292,24 +292,24 @@ var jSAI = function() {
                                                                                 cube = $('.cube5');
                                                                                 markAI(cube);
                                                                             } else {
-                                                                                if (cube1 === "") {
-                                                                                    cube = $('.cube1');
+                                                                                if (cube2 === "") {
+                                                                                    cube = $('.cube2');
                                                                                     markAI(cube);
                                                                                 } else {
                                                                                     if (cube8 === "") {
                                                                                         cube = $('.cube8');
                                                                                         markAI(cube);
                                                                                     } else {
-                                                                                        if (cube3 === "") {
-                                                                                            cube = $('.cube2');
+                                                                                        if (cube1 === "") {
+                                                                                            cube = $('.cube1');
                                                                                             markAI(cube);
                                                                                         } else {
                                                                                             if (cube7 === "") {
                                                                                                 cube = $('.cube7');
                                                                                                 markAI(cube);
                                                                                             } else {
-                                                                                                if (cube8 === "") {
-                                                                                                    cube = $('.cube8');
+                                                                                                if (cube6 === "") {
+                                                                                                    cube = $('.cube6');
                                                                                                     markAI(cube);
                                                                                                 } else {
                                                                                                     if (cube9 === "") {
