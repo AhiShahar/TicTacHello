@@ -14,6 +14,8 @@ var charSelectOne = function() {
     }
 };
 $playerOneOptions.on("click", charSelectOne); // add an event listener to the player images for the blue player
+
+
 // select character for the second human player if chosen
 var $playerTwoOptions = $("#rightColumn img");
 var $imgResetTwo = "";
@@ -30,6 +32,8 @@ var charSelectTwo = function() {
     }
 };
 $playerTwoOptions.on("click", charSelectTwo); // add an event listener to the player images for the red player
+
+
 // options for AI player
 var opponent = "friend";
 var $buttons = $("button");
@@ -54,6 +58,7 @@ var charSelectJs = function() {
     $imgResetTwo = $(selection);
 };
 $buttons.on("click", opponentSelect);
+
 
 // a function to mark selected tiles with (players turn) mark
 var $gameTiles = $(".board div div");
@@ -102,6 +107,13 @@ var markTile = function() {
 };
 $gameTiles.on("click", markTile); // add event listener to the board
 
+
+// Reset function to run once a winner as been delared
+var reset = function() {
+    // console.log("reset was ran");
+    location.reload();
+};
+
 // an Array of Arrays representing the IDs of all the game tiles in winning combinations
 var cubes = [
     [".cube1", ".cube2", ".cube3"],
@@ -113,12 +125,6 @@ var cubes = [
     [".cube3", ".cube6", ".cube9"],
     [".cube3", ".cube5", ".cube7"]
 ];
-
-// Reset function to run once a winner as been delared
-var reset = function() {
-    // console.log("reset was ran");
-    location.reload();
-};
 
 // itterate through the array of arrays to check if any condition matches a win
 var checkWin = function(player) {
@@ -276,45 +282,33 @@ var jSAI = function() {
                                                                         } else if (counter === 3 && (cube9 === "" && (cube6 === $playerOne && cube8 === $playerOne))) {
                                                                             cube = $('.cube9');
                                                                             markAI(cube);
-                                                                        } else if (counter === 1 && cube3 === $playerOne) {
-                                                                            cube = $('.cube5');
-                                                                            markAI(cube);
-                                                                        } else if (counter === 1 && cube7 === $playerOne) {
-                                                                            cube = $('.cube5');
-                                                                            markAI(cube);
-                                                                        } else if (counter === 1 && cube1 === $playerOne) {
-                                                                            cube = $('.cube5');
-                                                                            markAI(cube);
-                                                                        } else if (counter === 1 && cube9 === $playerOne) {
-                                                                            cube = $('.cube5');
-                                                                            markAI(cube);
                                                                         } else {
                                                                             if (cube5 === "") {
                                                                                 cube = $('.cube5');
                                                                                 markAI(cube);
                                                                             } else {
-                                                                                if (cube2 === "") {
-                                                                                    cube = $('.cube2');
+                                                                                if (cube1 === "") {
+                                                                                    cube = $('.cube1');
                                                                                     markAI(cube);
                                                                                 } else {
-                                                                                    if (cube8 === "") {
-                                                                                        cube = $('.cube8');
+                                                                                    if (cube3 === "") {
+                                                                                        cube = $('.cube3');
                                                                                         markAI(cube);
                                                                                     } else {
-                                                                                        if (cube1 === "") {
-                                                                                            cube = $('.cube1');
+                                                                                        if (cube7 === "") {
+                                                                                            cube = $('.cube7');
                                                                                             markAI(cube);
                                                                                         } else {
-                                                                                            if (cube7 === "") {
-                                                                                                cube = $('.cube7');
+                                                                                            if (cube9 === "") {
+                                                                                                cube = $('.cube9');
                                                                                                 markAI(cube);
                                                                                             } else {
                                                                                                 if (cube6 === "") {
                                                                                                     cube = $('.cube6');
                                                                                                     markAI(cube);
                                                                                                 } else {
-                                                                                                    if (cube9 === "") {
-                                                                                                        cube = $('.cube9');
+                                                                                                    if (cube2 === "") {
+                                                                                                        cube = $('.cube2');
                                                                                                         markAI(cube);
                                                                                                     }
                                                                                                 }
