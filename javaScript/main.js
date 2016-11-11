@@ -31,7 +31,7 @@ var charSelectTwo = function() {
 };
 $playerTwoOptions.on("click", charSelectTwo); // add an event listener to the player images for the red player
 // options for AI player
-var opponent = "theGame";
+var opponent = "friend";
 var $buttons = $("button");
 var opponentSelect = function() {
     if ($(this).html() == "The Game") {
@@ -66,6 +66,7 @@ var markTile = function() {
     }
     if ($playerTwo === "") { // confirms the opponent, if none selected defaults to the AI
         charSelectJs();
+        opponent = "theGame";
     }
     if (counter % 2 === 0) { // check who's turn it is
         if ($(this).html() === "") { // prevent from player marking over each other
