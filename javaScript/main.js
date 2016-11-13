@@ -200,122 +200,91 @@ var jSAI = function() {
     var cube = "";
     if (cube1 === "" && ((cube3 === $playerTwo && cube2 === $playerTwo) || (cube9 === $playerTwo && cube5 === $playerTwo) || (cube7 === $playerTwo && cube4 === $playerTwo))) {
         cube = $('.cube1');
-        markAI(cube);
     } else {
         if (cube2 === "" && ((cube1 === $playerTwo && cube3 === $playerTwo) || (cube8 === $playerTwo && cube5 === $playerTwo))) {
             cube = $('.cube2');
-            markAI(cube);
         } else {
             if (cube3 === "" && ((cube1 === $playerTwo && cube2 === $playerTwo) || (cube7 === $playerTwo && cube5 === $playerTwo) || (cube9 === $playerTwo && cube6 === $playerTwo))) {
                 cube = $('.cube3');
-                markAI(cube);
             } else {
                 if (cube9 === "" && ((cube7 === $playerTwo && cube8 === $playerTwo) || (cube1 === $playerTwo && cube5 === $playerTwo) || (cube3 === $playerTwo && cube6 === $playerTwo))) {
                     cube = $('.cube9');
-                    markAI(cube);
                 } else {
                     if (cube7 === "" && ((cube9 === $playerTwo && cube8 === $playerTwo) || (cube3 === $playerTwo && cube5 === $playerTwo) || (cube1 === $playerTwo && cube4 === $playerTwo))) {
                         cube = $('.cube7');
-                        markAI(cube);
                     } else {
                         if (cube8 === "" && ((cube9 === $playerTwo && cube7 === $playerTwo) || (cube2 === $playerTwo && cube5 === $playerTwo))) {
                             cube = $('.cube8');
-                            markAI(cube);
                         } else {
                             if (cube4 === "" && ((cube6 === $playerTwo && cube5 === $playerTwo) || (cube1 === $playerTwo && cube7 === $playerTwo))) {
                                 cube = $('.cube4');
-                                markAI(cube);
                             } else {
                                 if (cube6 === "" && ((cube3 === $playerTwo && cube9 === $playerTwo) || (cube5 === $playerTwo && cube4 === $playerTwo))) {
                                     cube = $('.cube6');
-                                    markAI(cube);
                                 } else {
                                     if (cube5 === "" && ((cube3 === $playerTwo && cube7 === $playerTwo) || (cube9 === $playerTwo && cube1 === $playerTwo) || (cube6 === $playerTwo && cube4 === $playerTwo) || (cube8 === $playerTwo && cube2 === $playerTwo))) {
                                         cube = $('.cube5');
-                                        markAI(cube);
                                     } else // if no two in a row for AI
                                     if (cube1 === "" && ((cube3 === $playerOne && cube2 === $playerOne) || (cube9 === $playerOne && cube5 === $playerOne) || (cube7 === $playerOne && cube4 === $playerOne))) {
                                         cube = $('.cube1');
-                                        markAI(cube);
                                     } else {
                                         if (cube2 === "" && ((cube1 === $playerOne && cube3 === $playerOne) || (cube8 === $playerOne && cube5 === $playerOne))) {
                                             cube = $('.cube2');
-                                            markAI(cube);
                                         } else {
                                             if (cube3 === "" && ((cube1 === $playerOne && cube2 === $playerOne) || (cube7 === $playerOne && cube5 === $playerOne) || (cube9 === $playerOne && cube6 === $playerOne))) {
                                                 cube = $('.cube3');
-                                                markAI(cube);
                                             } else {
                                                 if (cube9 === "" && ((cube7 === $playerOne && cube8 === $playerOne) || (cube1 === $playerOne && cube5 === $playerOne) || (cube3 === $playerOne && cube6 === $playerOne))) {
                                                     cube = $('.cube9');
-                                                    markAI(cube);
                                                 } else {
                                                     if (cube7 === "" && ((cube9 === $playerOne && cube8 === $playerOne) || (cube3 === $playerOne && cube5 === $playerOne) || (cube1 === $playerOne && cube4 === $playerOne))) {
                                                         cube = $('.cube7');
-                                                        markAI(cube);
                                                     } else {
                                                         if (cube8 === "" && ((cube9 === $playerOne && cube7 === $playerOne) || (cube2 === $playerOne && cube5 === $playerOne))) {
                                                             cube = $('.cube8');
-                                                            markAI(cube);
                                                         } else {
                                                             if (cube4 === "" && ((cube6 === $playerOne && cube5 === $playerOne) || (cube1 === $playerOne && cube7 === $playerOne))) {
                                                                 cube = $('.cube4');
-                                                                markAI(cube);
                                                             } else {
                                                                 if (cube6 === "" && ((cube3 === $playerOne && cube9 === $playerOne) || (cube5 === $playerOne && cube4 === $playerOne))) {
                                                                     cube = $('.cube6');
-                                                                    markAI(cube);
                                                                 } else {
                                                                     if (cube5 === "" && ((cube3 === $playerOne && cube7 === $playerOne) || (cube9 === $playerOne && cube1 === $playerOne) || (cube6 === $playerOne && cube4 === $playerOne) || (cube8 === $playerOne && cube2 === $playerOne))) {
                                                                         cube = $('.cube5');
-                                                                        markAI(cube);
                                                                     } else { // no 2 in a row for opponent
                                                                         if (counter === 3 && (cube1 === "" && (cube2 === $playerOne && cube4 === $playerOne))) {
                                                                             cube = $('.cube1');
-                                                                            markAI(cube);
                                                                         } else if (counter === 3 && (cube3 === "" && (cube2 === $playerOne && cube6 === $playerOne))) {
                                                                             cube = $('.cube3');
-                                                                            markAI(cube);
                                                                         } else if (counter === 3 && (cube7 === "" && (cube4 === $playerOne && cube8 === $playerOne))) {
                                                                             cube = $('.cube7');
-                                                                            markAI(cube);
                                                                         } else if (counter === 3 && (cube2 === "" && (cube1 === $playerOne && cube9 === $playerOne))) {
                                                                             cube = $('.cube2');
-                                                                            markAI(cube);
                                                                         } else if (counter === 3 && (cube4 === "" && (cube3 === $playerOne && cube7 === $playerOne))) {
                                                                             cube = $('.cube4');
-                                                                            markAI(cube);
                                                                         } else if (counter === 3 && (cube9 === "" && (cube6 === $playerOne && cube8 === $playerOne))) {
                                                                             cube = $('.cube9');
-                                                                            markAI(cube);
                                                                         } else {
                                                                             if (cube5 === "") {
                                                                                 cube = $('.cube5');
-                                                                                markAI(cube);
                                                                             } else {
                                                                                 if (cube1 === "") {
                                                                                     cube = $('.cube1');
-                                                                                    markAI(cube);
                                                                                 } else {
                                                                                     if (cube3 === "") {
                                                                                         cube = $('.cube3');
-                                                                                        markAI(cube);
                                                                                     } else {
                                                                                         if (cube7 === "") {
                                                                                             cube = $('.cube7');
-                                                                                            markAI(cube);
                                                                                         } else {
                                                                                             if (cube9 === "") {
                                                                                                 cube = $('.cube9');
-                                                                                                markAI(cube);
                                                                                             } else {
                                                                                                 if (cube6 === "") {
                                                                                                     cube = $('.cube6');
-                                                                                                    markAI(cube);
                                                                                                 } else {
                                                                                                     if (cube2 === "") {
                                                                                                         cube = $('.cube2');
-                                                                                                        markAI(cube);
                                                                                                     }
                                                                                                 }
                                                                                             }
@@ -341,4 +310,5 @@ var jSAI = function() {
             }
         }
     }
+    markAI(cube);
 };
