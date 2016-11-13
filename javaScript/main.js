@@ -279,6 +279,12 @@ var jSAI = function() {
                                                                         } else if (counter === 3 && (cube7 === "" && (cube4 === $playerOne && cube8 === $playerOne))) {
                                                                             cube = $('.cube7');
                                                                             markAI(cube);
+                                                                        } else if (counter === 3 && (cube2 === "" && (cube1 === $playerOne && cube9 === $playerOne))) {
+                                                                            cube = $('.cube2');
+                                                                            markAI(cube);
+                                                                        } else if (counter === 3 && (cube4 === "" && (cube3 === $playerOne && cube7 === $playerOne))) {
+                                                                            cube = $('.cube4');
+                                                                            markAI(cube);
                                                                         } else if (counter === 3 && (cube9 === "" && (cube6 === $playerOne && cube8 === $playerOne))) {
                                                                             cube = $('.cube9');
                                                                             markAI(cube);
